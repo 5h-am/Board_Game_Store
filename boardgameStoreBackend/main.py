@@ -8,7 +8,9 @@ import os
 
 load_dotenv()
 
-DB_PATH = os.getenv("DB_PATH", "../games.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "games.db")
+
 
 app = Flask(__name__)
 CORS(app)
