@@ -7,6 +7,9 @@ import { Explore } from './explore/explore'
 import { Ranking  } from './rankings/rankings'
 import { BuyPage } from './buypage/buypage'
 import { Cart } from './cart/cart'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/ReactToastify.css';
+import { toast } from 'react-toastify'
 
 const apiUrl = import.meta.env.VITE_API_URL
 const App = () => {
@@ -24,8 +27,9 @@ const App = () => {
     setDisplay("CART");
   }
 
-  const handleAddToCart = (x) => {
-    window.alert("Added to Cart")
+  const handleAddToCart = (e,x) => {
+    e.stopPropagation()
+    toast.success("The Game has been added to Cart", { toastId: "cart-add" })
     const items = JSON.parse(localStorage.getItem("cart_items")) || [];
     items.push(x)
     localStorage.setItem("cart_items",JSON.stringify(items))
@@ -83,6 +87,15 @@ const App = () => {
     {(display==="SEARCH") && <SearchPage handleBuyPage={handleBuyPage} searchResults={searchResults} handleAddToCart={handleAddToCart} /> }
     {(display==="CART") && <Cart handleBuyPage={handleBuyPage} handleBuyNow={handleBuyNow} />}
     {(display==="BUYNOW") && <div className="loader-box"><h1>This Feature Is Not Availabe Yet</h1></div>}
+       <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
     </>
   )
 }
@@ -142,7 +155,7 @@ const SearchPage = ({ handleBuyPage,searchResults,handleAddToCart } ) => {
                   <h4>Rating : {(searchResults[2]/2).toFixed(2)}</h4>
               </div>
           </div>
-          <button className="add-to-cart-btn" value={searchResults} onClick={()=> handleAddToCart(searchResults)}>Add to Cart</button>
+          <button className="add-to-cart-btn" value={searchResults} onClick={(e)=> handleAddToCart(e,searchResults)}>Add to Cart</button>
       </div>
     </div>
     }

@@ -3,14 +3,21 @@ import requests
 from bs4 import BeautifulSoup
 from flask_cors import CORS
 import sqlite3
-import pandas as pd
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
+DB_PATH = os.getenv("DB_PATH", "../games.db")
+
 app = Flask(__name__)
 CORS(app)
+
+ALLOWED_FAMILIES = {"familygames_rank", "abstracts_rank", "partygames_rank", 
+                    "strategygames_rank", "thematic_rank", "wargames_rank"}
+ALLOWED_SORTBY = {"rank", "average", "usersrated", "prices", "yearpublished"}
+ALLOWED_ORDER = {"ASC", "DESC"}
+
 
 
 def wikipedia_info(game_name):
@@ -50,7 +57,7 @@ def home():
 @app.route("/getData/")
 def getData () :
     try:
-        with sqlite3.connect("../games.db") as conn:
+        with sqlite3.connect(DB_PATH) as conn:
             cursor = conn.cursor()                
             cursor.execute("SELECT games_id,name,average,thumbnails,prices FROM games")
             result = cursor.fetchall()
@@ -72,8 +79,10 @@ def getData () :
 
 @app.route("/getData/<string:family>/")
 def getFamilyData(family):
+    if family not in ALLOWED_FAMILIES :
+        return jsonify({"error": "Invalid parameters"}), 400
     try:
-        with sqlite3.connect("../games.db") as conn:
+        with sqlite3.connect(DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute(f"SELECT games_id,name,average,thumbnails,prices FROM games WHERE {family} != 0")
             result = cursor.fetchall()
@@ -96,8 +105,10 @@ def getFamilyData(family):
 
 @app.route("/getData/<string:family>/<string:sortby>/<string:sortingWay>/")
 def getSortedData(family,sortby,sortingWay):
+    if family not in ALLOWED_FAMILIES or sortby not in ALLOWED_SORTBY or sortingWay not in ALLOWED_ORDER:
+        return jsonify({"error": "Invalid parameters"}), 400
     try:
-        with sqlite3.connect("../games.db")as conn:
+        with sqlite3.connect(DB_PATH)as conn:
             cursor = conn.cursor()
             cursor.execute(f"SELECT games_id,name,average,thumbnails,prices FROM games WHERE {family} != 0 ORDER BY {sortby} {sortingWay}")
             result = cursor.fetchall()
@@ -119,8 +130,10 @@ def getSortedData(family,sortby,sortingWay):
 
 @app.route("/getData/<string:sortby>/<string:sortingWay>/")
 def getNoFamilySortedData(sortby,sortingWay):
+    if sortby not in ALLOWED_SORTBY or sortingWay not in ALLOWED_ORDER:
+        return jsonify({"error": "Invalid parameters"}), 400
     try:
-        with sqlite3.connect("../games.db")as conn:
+        with sqlite3.connect(DB_PATH)as conn:
             cursor = conn.cursor()
             cursor.execute(f"SELECT games_id,name,average,thumbnails,prices FROM games ORDER BY {sortby} {sortingWay}")
             result = cursor.fetchall()
@@ -144,7 +157,7 @@ def getNoFamilySortedData(sortby,sortingWay):
 def productInfo(games_id):
     youtubeApiKey = os.getenv("YOUTUBE_API_KEY")
     try:
-        with sqlite3.connect("../games.db") as conn:
+        with sqlite3.connect(DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM games WHERE games_id = ?",(games_id,))
             result = cursor.fetchall()
@@ -160,7 +173,7 @@ def productInfo(games_id):
 @app.route("/getProduct/<string:search>/")
 def getProduct(search):
     try:
-        with sqlite3.connect("../games.db") as conn:
+        with sqlite3.connect(DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT games_id, name, average, thumbnails, prices FROM games WHERE name LIKE ?",(f"%{search}%",))
             result = cursor.fetchone()

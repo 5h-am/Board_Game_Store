@@ -8,6 +8,7 @@ const Cart = ({ handleBuyPage,handleBuyNow }) => {
     let total = 0;
 
     const handleItemRemoval = (e) => {
+        e.stopPropagation()
         cart_items.splice(e.target.value,1)
         localStorage.setItem("cart_items",JSON.stringify(cart_items))
         setCartItems(cart_items)

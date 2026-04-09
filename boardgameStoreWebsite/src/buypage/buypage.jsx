@@ -50,7 +50,7 @@ function cleanText(rawText) {
 }
 
 
-const BuyPage = ({ initialApiUrl,gameId,handleAddToCart,inCart }) => {
+const BuyPage = ({ initialApiUrl,gameId,handleAddToCart }) => {
 
     const [productDetails,dispatchProductDetails] = React.useReducer(InfoReducer,
         {isLoading:false,isError:false,data:[],video:"",details:""}
@@ -93,7 +93,7 @@ const BuyPage = ({ initialApiUrl,gameId,handleAddToCart,inCart }) => {
                     <h2>${productDetails.data[15]}</h2>
                     <h4>Rating : {(productDetails.data[5]/2).toFixed(2)}</h4>
                     <h2>{productDetails.data[2]}</h2>
-                    <button className='add-to-cart-btn buy-page-cart-btn'  onClick={() => handleAddToCart([productDetails.data[1],productDetails.data[2],productDetails.data[5],productDetails.data[14],productDetails.data[15]])} >Add to Cart</button>
+                    <button className='add-to-cart-btn buy-page-cart-btn'  onClick={(e) => handleAddToCart(e,[productDetails.data[1],productDetails.data[2],productDetails.data[5],productDetails.data[14],productDetails.data[15]])} >Add to Cart</button>
                 </div>
             </div>
             <div className='about'>
@@ -108,7 +108,7 @@ const BuyPage = ({ initialApiUrl,gameId,handleAddToCart,inCart }) => {
                 <div className='howtoplay-box'>
                     <p>{cleanText(productDetails.details["howtoplay"])}</p>
                     <div className="video-box">
-                        <iframe src={productDetails.video} title='How to Play This Game' frameborder="0" allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'>
+                        <iframe src={productDetails.video} title='How to Play This Game' frameBorder="0" allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'>
                         </iframe>
                     </div>
                 </div>

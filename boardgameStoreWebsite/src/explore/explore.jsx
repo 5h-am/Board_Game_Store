@@ -48,6 +48,7 @@ const Explore = ({ initialApiUrl,initialFamily,initialFamilyDisplay,handleBuyPag
     }
 
     const handleFamily = (e) => {
+        setPage(1)
         if (sortBy === "rank"){
             setApiUrl(initialApiUrl+"getData/"+e.target.value)
         } else {
@@ -211,7 +212,7 @@ const ProductWindow = ({ games,pagesList,handlePage,handleBuyPage,handleAddToCar
                                     <h4>Rating : {(i[2]/2).toFixed(2)}</h4>
                                 </div>
                             </div>
-                            <button className="add-to-cart-btn" value={i} onClick={()=> handleAddToCart(i)}>Add to Cart</button>
+                            <button className="add-to-cart-btn" value={i} onClick={(e)=> handleAddToCart(e,i)}>Add to Cart</button>
                         </div>
                     )
                 })}
@@ -227,4 +228,4 @@ const ProductWindow = ({ games,pagesList,handlePage,handleBuyPage,handleAddToCar
         </>
     )
 }
-export { Explore,AppliedFamily,ProductWindow,Filter }
+export { Explore }

@@ -1,7 +1,5 @@
 import * as React from 'react'
 import './home.css';
-import BackArrow from '../assets/back.svg?react';
-import ForwardArrow from '../assets/forward.svg?react';
 import { Explore } from "../explore/explore"
 
 const Home = ({ handleRanking,initialApiUrl,handleBuyPage,handleAddToCart }) => {
