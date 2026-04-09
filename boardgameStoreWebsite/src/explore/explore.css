@@ -1,0 +1,190 @@
+.explore-box {
+    display: flex;
+    gap: 1%;
+}
+
+.filter-box {
+    inline-size: 35%;
+    background-color: var(--sage-green);
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    margin-right: auto;
+}
+
+.filter-box h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+.family-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sortBy-box {
+    margin-block: 2em;
+}
+
+
+.sortBy-box select{
+    font-family: inherit;
+    background-color: var(--main-bg);
+    border-radius: 0.5rem;
+    padding: 0.2em 0.5em;
+}
+
+.sortBy-box select:hover {
+    cursor: pointer;
+}
+
+.sorting-method {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sorting-btn {
+    padding: 0.4em 0.8em;
+    border: 3px solid rgb(31, 74, 167);
+    border-radius: 1.5rem;
+    background-color: var(--light-aqua);
+    color: #000;
+    font-family: inherit;
+    transition: all 0.5s ease 0.2s;
+}
+
+.sorting-btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.sorting-btn:focus {
+    background-color: #000;
+    color: #fff;
+
+}
+
+input[type="checkbox"] {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+.games-list {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1em;
+}
+
+
+
+.product-box {
+    background-color: var(--sage-green);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+    transition: all 0.4s ease 0.2s;
+}
+
+.product-box:hover {
+    cursor: pointer;
+    transform: scale(1.035);
+}
+
+.product-box img{
+    border-radius: 1rem;
+    width: 20em;
+    height: 10em;
+}   
+
+.details-block {
+    margin-left: 10%;
+}
+
+.details-block > * {
+    margin-top: 1.5em;
+}
+
+.details-block h3 {
+    text-decoration: underline;
+}
+
+.add-to-cart-btn {
+    padding-block: 0.6em;
+    font-family: inherit;
+    background-color: var(--muted-gold);
+    inline-size: 90%;
+    margin-inline: auto;
+    margin-bottom: 0.5em;
+    border: none;
+    border-radius: 1rem;
+    transition: all 0.5s ease 0.2s
+}
+
+.add-to-cart-btn:hover {
+    outline: none;
+    cursor: pointer;
+    background-color: blanchedalmond;
+    transform: scale(1.1);
+
+}
+
+.pages-list {
+    margin-block: 1em;
+}
+
+
+.page-btn {
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid rgb(31, 74, 167);
+    background-color: var(--light-aqua);
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.5s ease 0.2s;
+}
+
+.page-btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    border-color: #000;
+}
+
+.page-btn:focus {
+    background-color: #000;
+    color: #fff;
+}
+
+.appliedFamily {
+    font-size: 1em;
+    font-style: italic;
+}
+
+@media (max-width:1000px) {
+    .games-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width:800px) {
+    .games-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:600px) {
+    .games-list {
+        grid-template-columns: 1fr;
+    }
+    .explore-box {
+        gap: 4%;
+    }
+}

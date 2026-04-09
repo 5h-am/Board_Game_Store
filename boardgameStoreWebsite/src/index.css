@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+:root {
+    --main-bg:#DCEBE1;
+    --nav-text:#4A4A4A;
+    --pale-rose:#FDE2E4;
+    --light-aqua:#C2E9E9;
+    --soft-pink:#FADDE1;
+    --beige:#F0EAD2;
+    --sage-green:#B7D3B2;
+    --muted-gold:#F9D99A;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-inline-size: 100%;
+}
+
+body {
+    background-color: var(--main-bg);
+    font-family: "Lexend", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+#root {
+    margin: 0;
+    padding: 0;
+}
