@@ -13,7 +13,7 @@ DB_PATH = os.path.join(BASE_DIR, "games.db")
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://board-game-store-sepia.vercel.app/"])
 
 ALLOWED_FAMILIES = {"familygames_rank", "abstracts_rank", "partygames_rank", 
                     "strategygames_rank", "thematic_rank", "wargames_rank"}
